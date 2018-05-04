@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/MainMenu.unity
     guid: 3068464e17535604d860364bc96df7eb
   - enabled: 1
-    path: Assets/PlayScene.unity
-    guid: f011c40bbbc7fce4798d48d36f4cb093
-  - enabled: 1
     path: Assets/OptionsScene.unity
     guid: 68816fc7d28e26a43b082c5f9f9264bb
+  - enabled: 1
+    path: Assets/PlayScene1.unity
+    guid: 6c90be093ec8df741b3f90b1c89b8ae0
+  - enabled: 1
+    path: Assets/PlayScene2.unity
+    guid: e6f5441c93b7f5641bf35642117e6c0e
+  - enabled: 1
+    path: Assets/PlayScene3.unity
+    guid: 570d4268233e5dd4f9efb69ee6deb384

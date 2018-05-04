@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour {
     public void Play()
     {
         ResumeTime();
-        SceneManager.LoadScene("PlayScene");
+        int scene = Random.Range(1, 4);
+        SceneManager.LoadScene("PlayScene"+scene);
     }
 
     public void Options()

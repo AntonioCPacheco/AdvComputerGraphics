@@ -31,5 +31,7 @@ public class PlayerHealthManager : MonoBehaviour {
         {
             hb[i].UpdateHealthBar();
         }
+        AudioClip aClip = Resources.Load<AudioClip>("Sound Assets/GlassFX");
+        SoundManager.instance.RandomizeSfx(aClip);
     }
 }

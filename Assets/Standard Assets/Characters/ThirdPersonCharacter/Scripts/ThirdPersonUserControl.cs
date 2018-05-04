@@ -18,7 +18,7 @@ public class ThirdPersonUserControl : MonoBehaviour
     public float timeBetweenShots = 1f;
     private float lastTimeShot;
 
-    public AudioClip shotSound;
+    private bool changed = false;
 
     private void Start()
     {
@@ -46,7 +46,10 @@ public class ThirdPersonUserControl : MonoBehaviour
 
     private void Update()
     {
-
+        if (changed && Time.realtimeSinceStartup - lastTimeShot >= timeBetweenShots) {
+            this.transform.GetComponentInChildren<FakeBallScript>().toggleAppearance(true);
+            changed = false;
+        }
     }
 
 
@@ -56,6 +59,8 @@ public class ThirdPersonUserControl : MonoBehaviour
         //SHOOTING
         if (CrossPlatformInputManager.GetAxis(str_player + "Shoot") > 0 && isAbleToShoot())
         {
+            this.transform.GetComponentInChildren<FakeBallScript>().toggleAppearance(false);
+            changed = true;
             lastTimeShot = Time.realtimeSinceStartup;
             Vector3 newBallPosition = new Vector3(this.transform.position.x, 1, this.transform.position.z);
 
@@ -69,18 +74,14 @@ public class ThirdPersonUserControl : MonoBehaviour
         //MOVEMENT
         // read inputs
         float h = CrossPlatformInputManager.GetAxis(str_player + "Horizontal");
-        float v = CrossPlatformInputManager.GetAxis(str_player + "Vertical");
+        float moveKey = CrossPlatformInputManager.GetAxis(str_player + "Move");
 
         // calculate move direction to pass to character
-            // calculate camera relative direction to move:
-        m_Move = v*m_CamForward + h*m_Cam.right;
-#if !MOBILE_INPUT
-		// walk speed multiplier
-	    if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 1.5f;
-#endif
+        // calculate camera relative direction to move:
+        m_Move = h*this.transform.right;
 
         // pass all parameters to the character control script
-        m_Character.Move(m_Move, false, false);
+        m_Character.Move(m_Move, moveKey);
     }
 
     bool isAbleToShoot()
